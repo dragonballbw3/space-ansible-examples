@@ -1,0 +1,569 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: Create Address
+      sd_address:
+        name: my_address1
+        ip_address: 1.1.1.1
+        state: present
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Create Address
+      sd_address:
+        name: my_address2
+        ip_address: 2.2.2.2
+        state: present
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Create Address Group
+      sd_address:
+        name: test_group1
+        type: group
+        state: present
+        members:
+          - my_address1
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Create Address Group
+      sd_address:
+        name: test_group2
+        type: group
+        state: present
+        members:
+          - my_address1
+          - my_address2
+      register: output
+
+    - debug:
+        var: output
+
+    # - name: Address Management
+    #   sd_address:
+    #     # id: 196609
+    #     name: "{{ item.name }}"
+    #     ip_address: "{{ item.address }}"
+    #     state: present
+    #   with_items:
+    #     - name: test10
+    #       address: 192.168.1.1
+    #     - name: test11
+    #       address: 192.168.1.1
+    #     - name: test12
+    #       address: 192.168.1.1
+    #     - name: test13
+    #       address: 192.168.1.1
+    #     - name: test14
+    #       address: 192.168.1.1
+    #     - name: test15
+    #       address: 192.168.1.1
+    #     - name: test16
+    #       address: 192.168.1.1
+    #     - name: test17
+    #       address: 192.168.1.1
+    #     - name: test18
+    #       address: 192.168.1.1
+    #     - name: test19
+    #       address: 192.168.1.1
+    #     - name: test20
+    #       address: 192.168.1.1
+    #     - name: test21
+    #       address: 192.168.1.1
+    #     - name: test22
+    #       address: 192.168.1.1
+    #     - name: test23
+    #       address: 192.168.1.1
+    #     - name: test24
+    #       address: 192.168.1.1
+    #     - name: test25
+    #       address: 192.168.1.1
+    #     - name: test26
+    #       address: 192.168.1.1
+    #     - name: test27
+    #       address: 192.168.1.1
+    #     - name: test28
+    #       address: 192.168.1.1
+    #     - name: test29
+    #       address: 192.168.1.1
+    #     - name: test30
+    #       address: 192.168.1.1
+    #     - name: test110
+    #       address: 192.168.1.1
+    #     - name: test111
+    #       address: 192.168.1.1
+    #     - name: test112
+    #       address: 192.168.1.1
+    #     - name: test113
+    #       address: 192.168.1.1
+    #     - name: test114
+    #       address: 192.168.1.1
+    #     - name: test115
+    #       address: 192.168.1.1
+    #     - name: test116
+    #       address: 192.168.1.1
+    #     - name: test117
+    #       address: 192.168.1.1
+    #     - name: test118
+    #       address: 192.168.1.1
+    #     - name: test119
+    #       address: 192.168.1.1
+    #     - name: test120
+    #       address: 192.168.1.1
+    #     - name: test121
+    #       address: 192.168.1.1
+    #     - name: test122
+    #       address: 192.168.1.1
+    #     - name: test123
+    #       address: 192.168.1.1
+    #     - name: test124
+    #       address: 192.168.1.1
+    #     - name: test125
+    #       address: 192.168.1.1
+    #     - name: test126
+    #       address: 192.168.1.1
+    #     - name: test127
+    #       address: 192.168.1.1
+    #     - name: test128
+    #       address: 192.168.1.1
+    #     - name: test129
+    #       address: 192.168.1.1
+    #     - name: test130
+    #       address: 192.168.1.1
+    #     - name: test210
+    #       address: 192.168.1.1
+    #     - name: test211
+    #       address: 192.168.1.1
+    #     - name: test212
+    #       address: 192.168.1.1
+    #     - name: test213
+    #       address: 192.168.1.1
+    #     - name: test214
+    #       address: 192.168.1.1
+    #     - name: test215
+    #       address: 192.168.1.1
+    #     - name: test216
+    #       address: 192.168.1.1
+    #     - name: test217
+    #       address: 192.168.1.1
+    #     - name: test218
+    #       address: 192.168.1.1
+    #     - name: test219
+    #       address: 192.168.1.1
+    #     - name: test220
+    #       address: 192.168.1.1
+    #     - name: test221
+    #       address: 192.168.1.1
+    #     - name: test222
+    #       address: 192.168.1.1
+    #     - name: test223
+    #       address: 192.168.1.1
+    #     - name: test224
+    #       address: 192.168.1.1
+    #     - name: test225
+    #       address: 192.168.1.1
+    #     - name: test226
+    #       address: 192.168.1.1
+    #     - name: test227
+    #       address: 192.168.1.1
+    #     - name: test228
+    #       address: 192.168.1.1
+    #     - name: test229
+    #       address: 192.168.1.1
+    #     - name: test230
+    #       address: 192.168.1.1
+    #     - name: test210
+    #       address: 192.168.1.1
+    #     - name: test211
+    #       address: 192.168.1.1
+    #     - name: test212
+    #       address: 192.168.1.1
+    #     - name: test213
+    #       address: 192.168.1.1
+    #     - name: test214
+    #       address: 192.168.1.1
+    #     - name: test215
+    #       address: 192.168.1.1
+    #     - name: test216
+    #       address: 192.168.1.1
+    #     - name: test217
+    #       address: 192.168.1.1
+    #     - name: test218
+    #       address: 192.168.1.1
+    #     - name: test219
+    #       address: 192.168.1.1
+    #     - name: test220
+    #       address: 192.168.1.1
+    #     - name: test221
+    #       address: 192.168.1.1
+    #     - name: test222
+    #       address: 192.168.1.1
+    #     - name: test223
+    #       address: 192.168.1.1
+    #     - name: test224
+    #       address: 192.168.1.1
+    #     - name: test225
+    #       address: 192.168.1.1
+    #     - name: test226
+    #       address: 192.168.1.1
+    #     - name: test227
+    #       address: 192.168.1.1
+    #     - name: test228
+    #       address: 192.168.1.1
+    #     - name: test229
+    #       address: 192.168.1.1
+    #     - name: test230
+    #       address: 192.168.1.1
+    #     - name: test2110
+    #       address: 192.168.1.1
+    #     - name: test2111
+    #       address: 192.168.1.1
+    #     - name: test2112
+    #       address: 192.168.1.1
+    #     - name: test2113
+    #       address: 192.168.1.1
+    #     - name: test2114
+    #       address: 192.168.1.1
+    #     - name: test2115
+    #       address: 192.168.1.1
+    #     - name: test2116
+    #       address: 192.168.1.1
+    #     - name: test2117
+    #       address: 192.168.1.1
+    #     - name: test2118
+    #       address: 192.168.1.1
+    #     - name: test2119
+    #       address: 192.168.1.1
+    #     - name: test2120
+    #       address: 192.168.1.1
+    #     - name: test2121
+    #       address: 192.168.1.1
+    #     - name: test2122
+    #       address: 192.168.1.1
+    #     - name: test2123
+    #       address: 192.168.1.1
+    #     - name: test2124
+    #       address: 192.168.1.1
+    #     - name: test2125
+    #       address: 192.168.1.1
+    #     - name: test2126
+    #       address: 192.168.1.1
+    #     - name: test2127
+    #       address: 192.168.1.1
+    #     - name: test2128
+    #       address: 192.168.1.1
+    #     - name: test2129
+    #       address: 192.168.1.1
+    #     - name: test2130
+    #       address: 192.168.1.1
+    #     - name: test2210
+    #       address: 192.168.1.1
+    #     - name: test2211
+    #       address: 192.168.1.1
+    #     - name: test2212
+    #       address: 192.168.1.1
+    #     - name: test2213
+    #       address: 192.168.1.1
+    #     - name: test2214
+    #       address: 192.168.1.1
+    #     - name: test2215
+    #       address: 192.168.1.1
+    #     - name: test2216
+    #       address: 192.168.1.1
+    #     - name: test2217
+    #       address: 192.168.1.1
+    #     - name: test2218
+    #       address: 192.168.1.1
+    #     - name: test2219
+    #       address: 192.168.1.1
+    #     - name: test2220
+    #       address: 192.168.1.1
+    #     - name: test2221
+    #       address: 192.168.1.1
+    #     - name: test2222
+    #       address: 192.168.1.1
+    #     - name: test2223
+    #       address: 192.168.1.1
+    #     - name: test2224
+    #       address: 192.168.1.1
+    #     - name: test2225
+    #       address: 192.168.1.1
+    #     - name: test2226
+    #       address: 192.168.1.1
+    #     - name: test2227
+    #       address: 192.168.1.1
+    #     - name: test2228
+    #       address: 192.168.1.1
+    #     - name: test2229
+    #       address: 192.168.1.1
+    #     - name: test2230
+    #       address: 192.168.1.1
+    #     - name: test310
+    #       address: 192.168.1.1
+    #     - name: test311
+    #       address: 192.168.1.1
+    #     - name: test312
+    #       address: 192.168.1.1
+    #     - name: test313
+    #       address: 192.168.1.1
+    #     - name: test314
+    #       address: 192.168.1.1
+    #     - name: test315
+    #       address: 192.168.1.1
+    #     - name: test316
+    #       address: 192.168.1.1
+    #     - name: test317
+    #       address: 192.168.1.1
+    #     - name: test318
+    #       address: 192.168.1.1
+    #     - name: test319
+    #       address: 192.168.1.1
+    #     - name: test320
+    #       address: 192.168.1.1
+    #     - name: test321
+    #       address: 192.168.1.1
+    #     - name: test322
+    #       address: 192.168.1.1
+    #     - name: test323
+    #       address: 192.168.1.1
+    #     - name: test324
+    #       address: 192.168.1.1
+    #     - name: test325
+    #       address: 192.168.1.1
+    #     - name: test326
+    #       address: 192.168.1.1
+    #     - name: test327
+    #       address: 192.168.1.1
+    #     - name: test328
+    #       address: 192.168.1.1
+    #     - name: test329
+    #       address: 192.168.1.1
+    #     - name: test330
+    #       address: 192.168.1.1
+    #     - name: test3110
+    #       address: 192.168.1.1
+    #     - name: test3111
+    #       address: 192.168.1.1
+    #     - name: test3112
+    #       address: 192.168.1.1
+    #     - name: test3113
+    #       address: 192.168.1.1
+    #     - name: test3114
+    #       address: 192.168.1.1
+    #     - name: test3115
+    #       address: 192.168.1.1
+    #     - name: test3116
+    #       address: 192.168.1.1
+    #     - name: test3117
+    #       address: 192.168.1.1
+    #     - name: test3118
+    #       address: 192.168.1.1
+    #     - name: test3119
+    #       address: 192.168.1.1
+    #     - name: test3120
+    #       address: 192.168.1.1
+    #     - name: test3121
+    #       address: 192.168.1.1
+    #     - name: test3122
+    #       address: 192.168.1.1
+    #     - name: test3123
+    #       address: 192.168.1.1
+    #     - name: test3124
+    #       address: 192.168.1.1
+    #     - name: test3125
+    #       address: 192.168.1.1
+    #     - name: test3126
+    #       address: 192.168.1.1
+    #     - name: test3127
+    #       address: 192.168.1.1
+    #     - name: test3128
+    #       address: 192.168.1.1
+    #     - name: test3129
+    #       address: 192.168.1.1
+    #     - name: test3130
+    #       address: 192.168.1.1
+    #     - name: test3210
+    #       address: 192.168.1.1
+    #     - name: test3211
+    #       address: 192.168.1.1
+    #     - name: test3212
+    #       address: 192.168.1.1
+    #     - name: test3213
+    #       address: 192.168.1.1
+    #     - name: test3214
+    #       address: 192.168.1.1
+    #     - name: test3215
+    #       address: 192.168.1.1
+    #     - name: test3216
+    #       address: 192.168.1.1
+    #     - name: test3217
+    #       address: 192.168.1.1
+    #     - name: test3218
+    #       address: 192.168.1.1
+    #     - name: test3219
+    #       address: 192.168.1.1
+    #     - name: test3220
+    #       address: 192.168.1.1
+    #     - name: test3221
+    #       address: 192.168.1.1
+    #     - name: test3222
+    #       address: 192.168.1.1
+    #     - name: test3223
+    #       address: 192.168.1.1
+    #     - name: test3224
+    #       address: 192.168.1.1
+    #     - name: test3225
+    #       address: 192.168.1.1
+    #     - name: test3226
+    #       address: 192.168.1.1
+    #     - name: test3227
+    #       address: 192.168.1.1
+    #     - name: test3228
+    #       address: 192.168.1.1
+    #     - name: test3229
+    #       address: 192.168.1.1
+    #     - name: test3230
+    #       address: 192.168.1.1
+    #     - name: test3210
+    #       address: 192.168.1.1
+    #     - name: test3211
+    #       address: 192.168.1.1
+    #     - name: test3212
+    #       address: 192.168.1.1
+    #     - name: test3213
+    #       address: 192.168.1.1
+    #     - name: test3214
+    #       address: 192.168.1.1
+    #     - name: test3215
+    #       address: 192.168.1.1
+    #     - name: test3216
+    #       address: 192.168.1.1
+    #     - name: test3217
+    #       address: 192.168.1.1
+    #     - name: test3218
+    #       address: 192.168.1.1
+    #     - name: test3219
+    #       address: 192.168.1.1
+    #     - name: test3220
+    #       address: 192.168.1.1
+    #     - name: test3221
+    #       address: 192.168.1.1
+    #     - name: test3222
+    #       address: 192.168.1.1
+    #     - name: test3223
+    #       address: 192.168.1.1
+    #     - name: test3224
+    #       address: 192.168.1.1
+    #     - name: test3225
+    #       address: 192.168.1.1
+    #     - name: test3226
+    #       address: 192.168.1.1
+    #     - name: test3227
+    #       address: 192.168.1.1
+    #     - name: test3228
+    #       address: 192.168.1.1
+    #     - name: test3229
+    #       address: 192.168.1.1
+    #     - name: test3230
+    #       address: 192.168.1.1
+    #     - name: test32110
+    #       address: 192.168.1.1
+    #     - name: test32111
+    #       address: 192.168.1.1
+    #     - name: test32112
+    #       address: 192.168.1.1
+    #     - name: test32113
+    #       address: 192.168.1.1
+    #     - name: test32114
+    #       address: 192.168.1.1
+    #     - name: test32115
+    #       address: 192.168.1.1
+    #     - name: test32116
+    #       address: 192.168.1.1
+    #     - name: test32117
+    #       address: 192.168.1.1
+    #     - name: test32118
+    #       address: 192.168.1.1
+    #     - name: test32119
+    #       address: 192.168.1.1
+    #     - name: test32120
+    #       address: 192.168.1.1
+    #     - name: test32121
+    #       address: 192.168.1.1
+    #     - name: test32122
+    #       address: 192.168.1.1
+    #     - name: test32123
+    #       address: 192.168.1.1
+    #     - name: test32124
+    #       address: 192.168.1.1
+    #     - name: test32125
+    #       address: 192.168.1.1
+    #     - name: test32126
+    #       address: 192.168.1.1
+    #     - name: test32127
+    #       address: 192.168.1.1
+    #     - name: test32128
+    #       address: 192.168.1.1
+    #     - name: test32129
+    #       address: 192.168.1.1
+    #     - name: test32130
+    #       address: 192.168.1.1
+    #     - name: test32210
+    #       address: 192.168.1.1
+    #     - name: test32211
+    #       address: 192.168.1.1
+    #     - name: test32212
+    #       address: 192.168.1.1
+    #     - name: test32213
+    #       address: 192.168.1.1
+    #     - name: test32214
+    #       address: 192.168.1.1
+    #     - name: test32215
+    #       address: 192.168.1.1
+    #     - name: test32216
+    #       address: 192.168.1.1
+    #     - name: test32217
+    #       address: 192.168.1.1
+    #     - name: test32218
+    #       address: 192.168.1.1
+    #     - name: test32219
+    #       address: 192.168.1.1
+    #     - name: test32220
+    #       address: 192.168.1.1
+    #     - name: test32221
+    #       address: 192.168.1.1
+    #     - name: test32222
+    #       address: 192.168.1.1
+    #     - name: test32223
+    #       address: 192.168.1.1
+    #     - name: test32224
+    #       address: 192.168.1.1
+    #     - name: test32225
+    #       address: 192.168.1.1
+    #     - name: test32226
+    #       address: 192.168.1.1
+    #     - name: test32227
+    #       address: 192.168.1.1
+    #     - name: test32228
+    #       address: 192.168.1.1
+    #     - name: test32229
+    #       address: 192.168.1.1
+    #     - name: test32230
+    #       address: 192.168.1.1
+    #     - name: test322291
+    #       address: 192.168.1.1
+    #     - name: test322302
+    #       address: 192.168.1.1

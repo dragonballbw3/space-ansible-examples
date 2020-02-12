@@ -1,0 +1,11 @@
+[space]
+space01 ansible_host=
+
+[space:vars]
+ansible_network_os=juniper.space.space
+ansible_connection=httpapi
+ansible_user=
+ansible_password=
+#ansible_httpapi_port=
+ansible_httpapi_validate_certs=False
+ansible_httpapi_use_ssl=True

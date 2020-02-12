@@ -1,0 +1,17 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: All devices
+      space_queue:
+        name: testq
+        state: absent
+      register: output
+
+    - debug:
+        var: output

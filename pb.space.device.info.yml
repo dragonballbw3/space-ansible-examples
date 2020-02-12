@@ -1,0 +1,64 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: All devices
+      space_device_info:
+      register: output
+
+    - debug:
+        var: output
+      
+    - name: Device By ID
+      juniper.space.space_device_info:
+        id: 1
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Device By Wrong ID
+      juniper.space.space_device_info:
+        id: 404
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Device By Name
+      juniper.space.space_device_info:
+        name: "vSRX-addr-0"
+      register: output
+    
+    - debug:
+        var: output
+
+    - name: Device By Fake Name
+      juniper.space.space_device_info:
+        name: "vSRX-addr-0asdfasdf"
+      register: output
+    
+    - debug:
+        var: output
+
+    - name: Device By Serial
+      juniper.space.space_device_info:
+        serialnumber: "5D32CF8D8495"
+      register: output
+    
+    - debug:
+        var: output
+
+    - name: Device By Name and serial
+      juniper.space.space_device_info:
+        name: "vSRX-addr-0"
+        serialnumber: "5D32CF8D8495"
+      register: output
+    
+    - debug:
+        var: output

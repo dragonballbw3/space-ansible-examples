@@ -1,0 +1,11 @@
+venv/*
+*code-workspace
+.vscode/*
+*__pycache__*
+.DS_Store
+collections/*
+ansible.log
+build_collection
+ansible/*
+*.tar.gz
+juniper*

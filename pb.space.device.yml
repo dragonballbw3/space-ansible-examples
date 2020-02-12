@@ -1,0 +1,30 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: Create Device
+      space_device:
+        ip_address: 100.123.12.0
+        state: present
+        username: 
+        password: 
+        use_ping: True
+        #use_snmp: False
+        #snmp_community: public
+        queue: testq
+      register: output
+
+    # - name: Remove device
+    #   space_device:
+    #     id: 9
+    #     state: absent
+    #   register: output
+
+
+    - debug:
+        var: output
