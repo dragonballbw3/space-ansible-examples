@@ -1,0 +1,18 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: SD Get All Devices
+      sd_device_info:
+        # id: 327687
+        platform_id: 3
+        # name: "vSRX-addr-0" 
+      register: output
+
+    - debug:
+        var: output

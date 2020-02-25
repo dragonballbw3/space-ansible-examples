@@ -1,0 +1,23 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: Get All NAT Policies
+      sd_nat_policy_info:
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Get NAT Policy by ID
+      sd_nat_policy_info:
+        id: 458753
+      register: output
+
+    - debug:
+        var: output
