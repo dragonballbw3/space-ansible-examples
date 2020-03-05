@@ -782,7 +782,7 @@ Modify the `pb.get.devices.yml` playbook's `debug` task to match the following:
 
     - debug:
         msg: "{{ item.OSVersion }}"
-      with_items: "{{ output.devices }}"
+      with_items: "{{ output.devices.device }}"
 ```
 
 ## Step 4.3
