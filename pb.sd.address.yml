@@ -6,52 +6,95 @@
   collections:
     - juniper.space
 
+  vars:
+    gtac_servers:
+      - name: gtac1
+        ip_address: 172.16.10.50
+      - name: gtac2
+        ip_address: 172.16.10.51
+
   tasks:
-    - name: Create Address
+    - name: Create GTAC Addresses
       sd_address:
-        name: my_address1
-        ip_address: 1.1.1.1
+        name: "{{ item.name }}"
+        ip_address: "{{ item.ip_address }}"
         state: present
       register: output
+      with_items: "{{ gtac_servers }}"
 
     - debug:
         var: output
 
-    - name: Create Address
-      sd_address:
-        name: my_address2
-        ip_address: 2.2.2.2
-        state: present
-      register: output
+    - debug:
+        var: gtac_servers
+
+    - set_fact:
+        gtac_server_names: "{{ gtac_servers | map(attribute='name') | list }}"
 
     - debug:
-        var: output
+        var: gtac_server_names
 
-    - name: Create Address Group
+    - name: Create GTAC Address Group
       sd_address:
-        name: test_group1
+        name: gtac-servers
+        state: present
         type: group
-        state: present
-        members:
-          - my_address1
-          - my_address2
+        members: "{{ gtac_server_names }}"
       register: output
 
     - debug:
-        var: output
+        var: output 
 
-    - name: Create Address Group
-      sd_address:
-        name: test_group2
-        type: group
-        state: present
-        members:
-          - my_address1
-          - my_address2
-      register: output
+    # - name: Create GTAC Address Group
+    #   sd_address:
+    #     name: gtac-servers
+    #     members: "{{"
 
-    - debug:
-        var: output
+    # - name: Create Address
+    #   sd_address:
+    #     name: my_address1
+    #     ip_address: 1.1.1.1
+    #     state: present
+    #   register: output
+
+    # - debug:
+    #     var: output
+
+    # - name: Create Address
+    #   sd_address:
+    #     name: my_address2
+    #     ip_address: 2.2.2.2
+    #     state: present
+    #   register: output
+
+    # - debug:
+    #     var: output
+
+    # - name: Create Address Group
+    #   sd_address:
+    #     name: test_group1
+    #     type: group
+    #     state: present
+    #     members:
+    #       - my_address1
+    #       - my_address2
+    #   register: output
+
+    # - debug:
+    #     var: output
+
+    # - name: Create Address Group
+    #   sd_address:
+    #     name: test_group2
+    #     type: group
+    #     state: present
+    #     members:
+    #       - my_address1
+    #       - my_address2
+    #   register: output
+
+    # - debug:
+    #     var: output
 
     # - name: Address Management
     #   sd_address:
