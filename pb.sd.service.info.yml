@@ -1,0 +1,25 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: Get All Services
+      sd_service_info:
+        name: test_group10
+        # id: 393268
+      register: output
+
+    - debug:
+        var: output
+
+    # - name: Get Service by ID
+    #   sd_service_info:
+    #     id: 393253
+    #   register: output
+
+    # - debug:
+    #     var: output

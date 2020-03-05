@@ -9,9 +9,9 @@
   tasks:
     - name: Get Addresses
       sd_address_info:
-        # id: 196609
-        # name: test_group2
-        # ip_address: 192.168.1.1
+        # id: 458755
+        # name: my_address
+        # ip_address: 1.1.1.1
       register: output
 
     - debug:

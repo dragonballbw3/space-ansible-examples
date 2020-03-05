@@ -1,0 +1,67 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+  #   - name: Create Service
+  #     sd_service:
+  #       state: absent
+  #       id: 393270
+  #       name: test2
+  #       description: Created by Ansible
+  #       protocols:
+  #         - name: http-8081
+  #           dst_port: 8081
+  #     register: output
+
+  #   - debug:
+  #       var: output
+
+
+    - name: Create Service 1
+      sd_service:
+        state: present
+        name: dev-http
+        description: Created by Ansible
+        protocols:
+          - name: dev-http
+            dst_port: "80"
+            protocol: tcp
+            disable_timeout: True
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Create Service 2
+      sd_service:
+        state: present
+        name: dev-https
+        description: Created by Ansible
+        protocols:
+          - name: dev-http
+            dst_port: "443"
+            protocol: tcp
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Create Service Group
+      sd_service:
+        state: present
+        name: dev-web
+        description: Created by Ansible
+        is_group: True
+        members:
+          - dev-http
+          - dev-https
+          - bgp
+      register: output
+
+    - debug:
+        var: output

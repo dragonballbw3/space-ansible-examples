@@ -1,0 +1,23 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: Create Service
+      sd_service_group:
+        state: present
+        name: test_group01
+        description: Created by Ansible
+        members:
+          - bgp
+          - aol
+          - apple-ichat
+          - fake_service
+      register: output
+
+    - debug:
+        var: output

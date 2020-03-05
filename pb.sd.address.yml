@@ -34,6 +34,7 @@
         state: present
         members:
           - my_address1
+          - my_address2
       register: output
 
     - debug:
@@ -57,10 +58,8 @@
     #     # id: 196609
     #     name: "{{ item.name }}"
     #     ip_address: "{{ item.address }}"
-    #     state: present
+    #     state: absent
     #   with_items:
-    #     - name: test10
-    #       address: 192.168.1.1
     #     - name: test11
     #       address: 192.168.1.1
     #     - name: test12

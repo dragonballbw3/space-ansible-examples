@@ -1,0 +1,25 @@
+---
+- name: Space API Example
+  hosts: all
+  connection: httpapi
+  gather_facts: no
+  collections:
+    - juniper.space
+
+  tasks:
+    - name: Get All FW Rules for a Policy
+      sd_fw_rule_info:
+        policy_id: 491525
+      register: output
+
+    - debug:
+        var: output
+  
+    # - name: Get FW Rule by ID
+    #   sd_fw_rule_info:
+    #     id: 458752
+    #     policy_id: 458753
+    #   register: output
+
+    # - debug:
+    #     var: output

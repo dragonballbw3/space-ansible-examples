@@ -10,7 +10,7 @@
     - name: All devices
       space_queue:
         name: testq
-        state: absent
+        state: present
       register: output
 
     - debug:

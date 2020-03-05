@@ -9,56 +9,57 @@
   tasks:
     - name: All devices
       space_device_info:
+        ip_address: 100.123.12.0
       register: output
 
     - debug:
         var: output
       
-    - name: Device By ID
-      juniper.space.space_device_info:
-        id: 1
-      register: output
+    # - name: Device By ID
+    #   juniper.space.space_device_info:
+    #     id: 1
+    #   register: output
 
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
 
-    - name: Device By Wrong ID
-      juniper.space.space_device_info:
-        id: 404
-      register: output
+    # - name: Device By Wrong ID
+    #   juniper.space.space_device_info:
+    #     id: 404
+    #   register: output
 
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
 
-    - name: Device By Name
-      juniper.space.space_device_info:
-        name: "vSRX-addr-0"
-      register: output
+    # - name: Device By Name
+    #   juniper.space.space_device_info:
+    #     name: "vSRX-addr-0"
+    #   register: output
     
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
 
-    - name: Device By Fake Name
-      juniper.space.space_device_info:
-        name: "vSRX-addr-0asdfasdf"
-      register: output
+    # - name: Device By Fake Name
+    #   juniper.space.space_device_info:
+    #     name: "vSRX-addr-0asdfasdf"
+    #   register: output
     
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
 
-    - name: Device By Serial
-      juniper.space.space_device_info:
-        serialnumber: "5D32CF8D8495"
-      register: output
+    # - name: Device By Serial
+    #   juniper.space.space_device_info:
+    #     serialnumber: "5D32CF8D8495"
+    #   register: output
     
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
 
-    - name: Device By Name and serial
-      juniper.space.space_device_info:
-        name: "vSRX-addr-0"
-        serialnumber: "5D32CF8D8495"
-      register: output
+    # - name: Device By Name and serial
+    #   juniper.space.space_device_info:
+    #     name: "vSRX-addr-0"
+    #     serialnumber: "5D32CF8D8495"
+    #   register: output
     
-    - debug:
-        var: output
+    # - debug:
+    #     var: output
