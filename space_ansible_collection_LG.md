@@ -854,7 +854,7 @@ Run the playbook:
 **Output:**
 
 ```bash
-$ ansible-playbook pb.sd.address.info.yml
+$ ansible-playbook pb.add.address.info.yml
 
 PLAY [Chapter 4] **********************************************************************************************************************************************
 
@@ -956,7 +956,7 @@ In this chapter, we will use vars stored in the playbook itself. These vars howe
 
 Also, we will focus on using lists and `with_items` to make future modificiations to the playbook easier.
 
-Create a playbook named `pb.add.addresses.yml` with the following content:
+Create a playbook named `pb.add.address.yml` with the following content:
 
 ```yaml
 ---
@@ -990,12 +990,12 @@ Create a playbook named `pb.add.addresses.yml` with the following content:
 
 Run the new playbook:
 
-> **ansible-playbook pb.sd.addresses.yml**
+> **ansible-playbook pb.add.address.yml**
 
 **Output:**
 
 ```bash
-$ ansible-playbook pb.sd.address.yml
+$ ansible-playbook pb.add.address.yml
 
 PLAY [Chapter 5] **********************************************************************************************************************************************
 
@@ -1022,7 +1022,7 @@ As expected there has been a new GTAC server provisioned and we now need to add 
 
 Because we planned ahead and are using `with_items` this is an easy change.
 
-Modify the `vars` section in the `pb.sd.address.yml` to match the following:
+Modify the `vars` section in the `pb.add.address.yml` to match the following:
 
 ```yaml
   vars:
@@ -1035,14 +1035,14 @@ Modify the `vars` section in the `pb.sd.address.yml` to match the following:
 
 ## Step 5.6
 
-Run the `pb.add.addresses.yml` playbook again to add the new GTAC server:
+Run the `pb.add.address.yml` playbook again to add the new GTAC server:
 
-> **ansible-playbook pb.add.addresses.yml**
+> **ansible-playbook pb.add.address.yml**
 
 **Output:**
 
 ```bash
-$ ansible-playbook pb.sd.address.yml
+$ ansible-playbook pb.add.address.yml
 
 PLAY [Chapter 5] **********************************************************************************************************************************************
 
@@ -1079,9 +1079,9 @@ Add the following task so we can examine how the `gtac_servers` variable current
 
 ## Step 5.8
 
-Rerun the `pb.add.addresses.yml` playbook:
+Rerun the `pb.add.address.yml` playbook:
 
-> **ansible-playbook pb.add.addresses.yml**
+> **ansible-playbook pb.add.address.yml**
 
 **Output:**
 
@@ -1112,7 +1112,7 @@ Since the `sd_address` module expects group members to only be a list of member 
 
 We can do this with the `set_fact` module.
 
-Add the following tasks to the end of the `pb.sd.address.yml` playbook:
+Add the following tasks to the end of the `pb.add.address.yml` playbook:
 
 ```yaml
     - set_fact:
@@ -1144,7 +1144,7 @@ Perfect. This is a variable containing only the list of names of the GTAC server
 
 ## Step 5.10
 
-Add the following final tasks to the `pb.add.addresses.yml` playbook:
+Add the following final tasks to the `pb.add.address.yml` playbook:
 
 ```yaml
     - name: Create GTAC Address Group
@@ -1159,7 +1159,7 @@ Add the following final tasks to the `pb.add.addresses.yml` playbook:
         var: output
 ```
 
-Your `pb.add.addresses.yml` playbook should now match the following:
+Your `pb.add.address.yml` playbook should now match the following:
 
 ```yaml
 ---
@@ -1212,9 +1212,9 @@ Your `pb.add.addresses.yml` playbook should now match the following:
 
 ## Step 5.11
 
-Rerun the `pb.add.addresses.yml` playbook:
+Rerun the `pb.add.address.yml` playbook:
 
-> **ansible-playbook pb.add.addresses.yml**
+> **ansible-playbook pb.add.address.yml**
 
 **Output:**
 
