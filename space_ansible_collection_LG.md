@@ -975,10 +975,11 @@ Create a playbook named `pb.add.addresses.yml` with the following content:
   tasks:
     - name: Create GTAC Addresses
       sd_address:
-        name: gtac1
-        ip_address: 1.1.1.1
+        name: "{{ item.name }}"
+        ip_address: "{{ item.ip_address }}"
         state: present
       register: output
+      with_items: "{{ gtac_servers }}"
 
     - debug:
         var: output
@@ -989,7 +990,7 @@ Create a playbook named `pb.add.addresses.yml` with the following content:
 
 Run the new playbook:
 
-> **ansible-playbook pb.add.addresses.yml**
+> **ansible-playbook pb.sd.addresses.yml**
 
 **Output:**
 
